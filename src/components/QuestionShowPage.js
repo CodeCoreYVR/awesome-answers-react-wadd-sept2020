@@ -2,7 +2,7 @@ import React from 'react';
 import QuestionDetails from './QuestionDetails';
 import AnswerDetails from './AnswerDetails';
 import AnswerList from './AnswerList'
-import answers from '../data/answers'
+
 // To compose our application, we will create components that nest other components.
 // Just as a function in JS can return only a single value, such as an object
 // you can only return one call to React.createElement() or one JSX element from a component.
