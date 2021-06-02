@@ -1,6 +1,7 @@
 import React from 'react';
 import QuestionShowPage from './components/QuestionShowPage';
 import QuestionIndexPage from './components/QuestionIndexPage';
+import AnswerList from './components/AnswerList';
 
 
 // Whenever you use JSX in a file, you must import React.
@@ -17,6 +18,7 @@ function App(){
     <div className="container">
       <QuestionIndexPage />
       <QuestionShowPage />
+      <AnswerList/>
     </div>
   )
 }
