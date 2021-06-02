@@ -1,5 +1,4 @@
 import React from 'react';
-
 // A React component is a function that returns a React element,
 // which are created with React.createElement() or JSX tags.
 // Our components' names must be in PascalCase, otherwise, it will

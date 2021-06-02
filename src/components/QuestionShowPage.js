@@ -1,8 +1,8 @@
 import React from 'react';
 import QuestionDetails from './QuestionDetails';
 import AnswerDetails from './AnswerDetails';
-
-
+import answers from '../data/answers'
+import AnswerList from './AnswerList'
 // To compose our application, we will create components that nest other components.
 // Just as a function in JS can return only a single value, such as an object
 // you can only return one call to React.createElement() or one JSX element from a component.
@@ -17,6 +17,9 @@ function QuestionShowPage(){
         author={{ full_name: "Mark Zuckerberg"}}
         view_count={100}
         created_at={new Date().toLocaleString()}
+        />
+               <AnswerList
+          answers={answers}
         />
         <AnswerDetails 
         body="White"
