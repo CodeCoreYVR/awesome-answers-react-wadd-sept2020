@@ -19,6 +19,7 @@ function QuestionShowPage(){
         view_count={100}
         created_at={new Date().toLocaleString()}
         />
+        <AnswerList/>
         <AnswerDetails 
         body="White"
         author={{ full_name: "Steve Jobs"}}
