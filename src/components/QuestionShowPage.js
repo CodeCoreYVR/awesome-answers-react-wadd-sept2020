@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import QuestionDetails from './QuestionDetails';
 import AnswerDetails from './AnswerDetails';
 import AnswerList from './AnswerList';
@@ -9,7 +9,8 @@ import AnswerList from './AnswerList';
 // you can only return one call to React.createElement() or one JSX element from a component.
 // However, you can nest as many components inside as you want, just like how you can nest
 // as many objects as you want inside of the object you return.
-function QuestionShowPage(){
+class QuestionShowPage extends Component {
+  render(){
     return(
       <main>
         <QuestionDetails 
@@ -28,5 +29,6 @@ function QuestionShowPage(){
       </main>
     )
   }
+}
 
-  export default QuestionShowPage;
+export default QuestionShowPage;
