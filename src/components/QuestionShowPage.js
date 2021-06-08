@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import QuestionDetails from './QuestionDetails';
-import AnswerDetails from './AnswerDetails';
 import AnswerList from './AnswerList';
 import questionData from '../data/questionData'
 
@@ -15,9 +14,20 @@ class QuestionShowPage extends Component {
   constructor(props){
     super(props);
     this.state = questionData
+    this.deleteAnswer = this.deleteAnswer.bind(this)
   }
+
+  deleteAnswer(id){
+    this.setState((state) => {
+      return {
+        answers: state.answers.filter(a => a.id !== id)
+      }
+    })
+  }
+
+
   render(){
-    const { title, body, author, view_count, created_at, answers } = this.state
+    const { title, body, author, view_count, created_at } = this.state
     return(
       <main>
         <QuestionDetails 
@@ -28,12 +38,8 @@ class QuestionShowPage extends Component {
         created_at={created_at}
         />
         <AnswerList
-        answers={answers}
-        />
-        <AnswerDetails 
-        body="White"
-        author={{ full_name: "Steve Jobs"}}
-        created_at={new Date().toLocaleString()}
+        answers={this.state.answers}
+        deleteAnswer={this.deleteAnswer}
         />
       </main>
     )

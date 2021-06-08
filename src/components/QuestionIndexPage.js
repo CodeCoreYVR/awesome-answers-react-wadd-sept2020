@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import questions from '../data/questions'
+import questionsData from '../data/questionsData'
+import NewQuestionForm from './NewQuestionForm'
 
 // We use map to return an array of React elements(created using JSX here)
 // Inside of {}, React will render that list of items.
@@ -12,19 +13,51 @@ import questions from '../data/questions'
 class QuestionIndexPage extends Component{
     constructor(props){
         super(props);
-        this.state = { questions: questions } // Like { key: value }
+        this.state = { questions: questionsData } // Like { key: value }
+        this.createQuestion = this.createQuestion.bind(this)
     }
+
+
+    createQuestion(params){
+        //Update the list of questions within our state by adding a new question to the list
+        this.setState((state) => {
+            return {
+                questions: [ // array of questions
+                    ...state.questions,
+                    {
+                        //Then copy the previous list of questions from our state into this new array
+                        // following the newly created question
+                        id: Math.max(...state.questions.map(q => q.id)) + 1, // array of all the question ids
+                        ...params // params of the question form
+                    }
+                ]
+            }
+        })
+    }
+
+    deleteQuestion(id){
+        this.setState((state) => {
+            return {
+                questions: state.questions.filter(q => q.id !== id)
+            }
+        })
+    }
+
+
+
     render(){
         return(
             <main>
+                <NewQuestionForm createQuestion={this.createQuestion} />
                 <h1>Questions</h1>
                 <ul style={{
                     listStyle: 'none',
                     paddingLeft: 0,
                 }}>
-                    {questions.map( ({ id, title}) => (
+                    {this.state.questions.map( ({ id, title}) => (
                         <li key={id}>
                             <a href="#">{id} - {title}</a>
+                            <button onClick={() => this.deleteQuestion(id)}>Delete</button>
                         </li>
                     ))}
                 </ul>

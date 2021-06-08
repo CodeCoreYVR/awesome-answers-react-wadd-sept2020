@@ -1,23 +1,21 @@
+import React from 'react';
 import AnswerDetails from './AnswerDetails'
-import answers from '../data/answers'
+// import answers from '../data/answers'
 
-function AnswerList(props){
+function AnswerList({answers, deleteAnswer}){
     return(
-        <main>
-            <h1>Answers</h1>
-            <ul style={{
-                listStyle: 'none',
-                paddingLeft: 0,
-            }}>
-                {answers.map( ({ body, author, created_at}) => (
-                    <li>
-                        <p>{body}</p>
-                        <p>answered by {author.full_name} </p>
-                        <br/>
-                    </li>
+        <div>
+            {answers.map( ({ body, author, created_at, id}, index) => (
+                    <AnswerDetails 
+                    key={index}
+                    id={id}
+                    body={body}
+                    author={author}
+                    created_at={created_at.toLocaleString()}
+                    deleteAnswer={deleteAnswer}
+                    />
                 ))}
-            </ul>
-        </main>
+        </div>
     )
 }
 
