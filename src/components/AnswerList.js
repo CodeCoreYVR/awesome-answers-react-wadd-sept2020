@@ -2,10 +2,13 @@ import React from 'react';
 import AnswerDetails from './AnswerDetails'
 // import answers from '../data/answers'
 
-function AnswerList({answers, deleteAnswer}){
+function AnswerList(props, deleteAnswer){
+    const answers = props.answers
     return(
         <div>
-            {answers.map( ({ body, author, created_at, id}, index) => (
+            {
+            answers?
+            answers.map( ({ body, author, created_at, id}, index) => (
                     <AnswerDetails 
                     key={index}
                     id={id}
@@ -14,7 +17,10 @@ function AnswerList({answers, deleteAnswer}){
                     created_at={created_at.toLocaleString()}
                     deleteAnswer={deleteAnswer}
                     />
-                ))}
+                ))
+            :
+            null
+            }
         </div>
     )
 }

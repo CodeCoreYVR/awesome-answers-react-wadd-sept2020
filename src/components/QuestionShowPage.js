@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import QuestionDetails from './QuestionDetails';
 import AnswerList from './AnswerList';
-import questionData from '../data/questionData'
+// import questionData from '../data/questionData'
+import {Question} from '../requests'
 
 
 // To compose our application, we will create components that nest other components.
@@ -13,8 +14,19 @@ import questionData from '../data/questionData'
 class QuestionShowPage extends Component {
   constructor(props){
     super(props);
-    this.state = questionData
+    this.state = { question : {} }
     this.deleteAnswer = this.deleteAnswer.bind(this)
+  }
+
+  componentDidMount(){
+    Question.show(this.props.match.params.id)
+    .then((question) => {
+      this.setState((state) => {
+        return {
+          question: question
+        }
+      })
+    })
   }
 
   deleteAnswer(id){
@@ -27,7 +39,7 @@ class QuestionShowPage extends Component {
 
 
   render(){
-    const { title, body, author, view_count, created_at } = this.state
+    const { title, body, author, view_count, created_at } = this.state.question
     return(
       <main>
         <QuestionDetails 

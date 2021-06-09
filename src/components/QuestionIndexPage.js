@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import questionsData from '../data/questionsData'
+// import questionsData from '../data/questionsData'
 import NewQuestionForm from './NewQuestionForm'
+import {Question} from '../requests'
 
 // We use map to return an array of React elements(created using JSX here)
 // Inside of {}, React will render that list of items.
@@ -13,10 +14,20 @@ import NewQuestionForm from './NewQuestionForm'
 class QuestionIndexPage extends Component{
     constructor(props){
         super(props);
-        this.state = { questions: questionsData } // Like { key: value }
+        this.state = { questions: [] } // Like { key: value }
         this.createQuestion = this.createQuestion.bind(this)
     }
 
+    componentDidMount(){
+        Question.index()
+        .then((questions) => {
+            this.setState((state) => {
+                return {
+                    questions: questions
+                }
+            })
+        })
+    }
 
     createQuestion(params){
         //Update the list of questions within our state by adding a new question to the list
@@ -29,7 +40,8 @@ class QuestionIndexPage extends Component{
                         // following the newly created question
                         id: Math.max(...state.questions.map(q => q.id)) + 1, // array of all the question ids
                         ...params // params of the question form
-                    }
+                    },
+                    ...state.questions
                 ]
             }
         })
@@ -48,7 +60,6 @@ class QuestionIndexPage extends Component{
     render(){
         return(
             <main>
-                <NewQuestionForm createQuestion={this.createQuestion} />
                 <h1>Questions</h1>
                 <ul style={{
                     listStyle: 'none',

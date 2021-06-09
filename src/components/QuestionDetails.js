@@ -14,7 +14,7 @@ function QuestionDetails({ title, body, author, view_count, created_at }){
           fontSize: '24px'
         }}
         >{body}</p>
-        <p>By: {author.full_name}</p>
+        <p>By: {author? author.full_name : null}</p>
         <div>
           <small>View Count: {view_count}</small>
           <small
