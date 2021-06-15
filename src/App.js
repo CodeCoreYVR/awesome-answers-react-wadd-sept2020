@@ -7,6 +7,7 @@ import { User} from './requests';
 import Navbar from './components/Navbar';
 import NewQuestionPage from './components/NewQuestionPage';
 import SignInPage from './components/SignInPage';
+import AuthRoute from './components/AuthRoute';
 
 // Whenever you use JSX in a file, you must import React.
 // Otherwise, when JSX converts to React.createElement,
@@ -71,7 +72,13 @@ class App extends Component {
             <Route exact path='/questions'> 
               <QuestionIndexPage />
             </Route>
-            <Route exact path='/questions/new' component={NewQuestionPage}/>
+            <AuthRoute
+            // The !! turns something 'truthy' or 'falsy' to true and false.
+              isAuthenticated={!!this.state.user}
+              exact
+              path='/questions/new'
+              component={NewQuestionPage}
+            />
             <Route exact path='/questions/:id' component={QuestionShowPage}/>
           </Switch>
         </BrowserRouter>
