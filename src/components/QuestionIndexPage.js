@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 // import questionsData from '../data/questionsData'
 import NewQuestionForm from './NewQuestionForm'
 import {Question} from '../requests'
+import {Link} from 'react-router-dom'
 
 // We use map to return an array of React elements(created using JSX here)
 // Inside of {}, React will render that list of items.
@@ -67,7 +68,7 @@ class QuestionIndexPage extends Component{
                 }}>
                     {this.state.questions.map( ({ id, title}) => (
                         <li key={id}>
-                            <a href="#">{id} - {title}</a>
+                            <Link to={`/questions/${id}`}>{id} - {title}</Link>
                             <button onClick={() => this.deleteQuestion(id)}>Delete</button>
                         </li>
                     ))}
