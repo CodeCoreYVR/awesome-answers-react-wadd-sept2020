@@ -8,14 +8,17 @@ const Navbar = ({ currentUser }) => {
             -
             { currentUser ? (
                 <React.Fragment>
-                    {/* This allow us to write components beside each other without wrapping
+                    <NavLink to='/questions/new'>New Questions</NavLink>
+                    - 
+                    <span>Welcome, {currentUser.full_name}</span>
+                    {/* React Fragment allow us to write components beside each other without wrapping
                     them in a parent container. This stops us from messing around the layout and
-                    keeps the Navlinks as a direct child of the <nav> */}
+                    keeps the Navlinks as a direct child of the <nav>. The short from is <> </> */}
                 </React.Fragment>
-            ) : () }
-            <NavLink to='/questions/new'>New Questions</NavLink>
+            ) : (
+                <NavLink to='/sign_in'>Sign In</NavLink>
+            ) }
             - 
-            <NavLink to='/sign_in'>Sign In</NavLink>
         </nav>
     )
 }
