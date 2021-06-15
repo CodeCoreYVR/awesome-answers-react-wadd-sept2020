@@ -28,8 +28,7 @@ const Navbar = ({ currentUser, onSignOut }) => {
                     - 
                     <NavLink to='/sign_up'>Sign Up</NavLink>
                 </>
-            ) }
-            - 
+            ) } 
         </nav>
     )
 }
