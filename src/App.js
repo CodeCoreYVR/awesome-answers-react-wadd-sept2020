@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import NewQuestionPage from './components/NewQuestionPage';
 import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
+import SignUpPage from './components/SignUpPage';
 
 // Whenever you use JSX in a file, you must import React.
 // Otherwise, when JSX converts to React.createElement,
@@ -69,6 +70,10 @@ class App extends Component {
             // the props passed to it. "routeProps" represents all the routing props, make sure
             // to pass them to the component as well.
             render={ (routeProps) => <SignInPage {...routeProps} onSignIn={this.getCurrentUser} /> }/>
+            <Route
+            exact
+            path='/sign_up'
+            render={ (routeProps) => <SignUpPage {...routeProps} onSignUp={this.getCurrentUser} /> }/>
             <Route exact path='/questions'> 
               <QuestionIndexPage />
             </Route>

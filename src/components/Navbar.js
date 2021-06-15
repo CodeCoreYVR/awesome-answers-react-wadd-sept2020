@@ -23,7 +23,11 @@ const Navbar = ({ currentUser, onSignOut }) => {
                     keeps the Navlinks as a direct child of the <nav>. The short from is <> </> */}
                 </React.Fragment>
             ) : (
-                <NavLink to='/sign_in'>Sign In</NavLink>
+                <>
+                    <NavLink to='/sign_in'>Sign In</NavLink>
+                    - 
+                    <NavLink to='/sign_up'>Sign Up</NavLink>
+                </>
             ) }
             - 
         </nav>
