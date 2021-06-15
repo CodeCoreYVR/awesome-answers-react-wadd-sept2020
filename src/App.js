@@ -3,9 +3,10 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import QuestionShowPage from './components/QuestionShowPage';
 import QuestionIndexPage from './components/QuestionIndexPage';
 import CurrentDateTime from './components/CurrentDateTime';
-import {Session} from './requests';
+import { User} from './requests';
 import Navbar from './components/Navbar';
-import NewQuestionPage from './components/NewQuestionPage'
+import NewQuestionPage from './components/NewQuestionPage';
+import SignInPage from './components/SignInPage';
 
 // Whenever you use JSX in a file, you must import React.
 // Otherwise, when JSX converts to React.createElement,
@@ -29,15 +30,18 @@ class App extends Component {
   }
 
   componentDidMount(){
-    Session.create({
-      email: 'js@winterfell.gov',
-      password: 'supersecret'
-    }).then(user => {
-      this.setState((state) => {
-        return {
-          user: user
-        }
-      })
+    this.getCurrentUser()
+  }
+
+  getCurrentUser = () => {
+    return User.current().then(user => {
+      // This is the safe navigation operator
+      // Similar to use && user.id
+      if(user?.id){
+        this.setState(state => {
+          return { user }
+        })
+      }
     })
   }
 
@@ -46,8 +50,18 @@ class App extends Component {
     return(
       <div className="container">
         <BrowserRouter>
-          <Navbar/>
+          <Navbar currentUser={this.state.user}/>
           <Switch>
+            <Route 
+            exact 
+            path='/sign_in'
+            // Anytime we need to want to render a component that requires some props and also
+            // that component is being rendered by Route component then the way to pass props
+            // is to use the "render" prop.
+            // It takes a function as an argument and the function returns the component with
+            // the props passed to it. "routeProps" represents all the routing props, make sure
+            // to pass them to the component as well.
+            render={ (routeProps) => <SignInPage {...routeProps} onSignIn={this.getCurrentUser} /> }/>
             <Route exact path='/questions'> 
               <QuestionIndexPage />
             </Route>

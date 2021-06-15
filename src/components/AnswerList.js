@@ -6,6 +6,7 @@ function AnswerList(props, deleteAnswer){
     const answers = props.answers
     return(
         <div>
+            
             {
             answers?
             answers.map( ({ body, author, created_at, id}, index) => (
