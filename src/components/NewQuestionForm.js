@@ -12,6 +12,7 @@ const NewQuestionForm = ({createQuestion}) => {
     }
     return(
         <form onSubmit={handleSubmit}>
+            <h1>New Question</h1>
             <div>
                 <label htmlFor="title">Title</label>
                 <br/>
