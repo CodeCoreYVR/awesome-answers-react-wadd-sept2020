@@ -1,47 +1,64 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 
-class CurrentDateTime extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            date: new Date()
-        }
-        console.log('1 Constructor fired')
-    }
+export const CurrentDateTime = () => {
+    const [dateTime, setDateTime] = useState(new Date());
 
-    componentDidMount(){
-        console.log('3 componentDidMount')
-        this.intervalId = setInterval(() => {
-            this.setState((state) => {
-                return {
-                    date: new Date()
-                }
-            })
-        }, 1000)
-    }
+    useEffect(() => {
+        console.log("componentDidMount")
+        const intervalId = setInterval(() => {
+            setDateTime(new Date());
+        }, 1000);
+        return() => {
+            console.log("componentWillUnmount");
+            clearInterval(intervalId);
+        };
+    }, []);
 
-    componentDidUpdate(){
-        console.log('componentDidUpdate')
-    }
-
-    componentWillUnmount(){
-        console.log('componentWillUnmount')
-        clearInterval(this.intervalId)
-    }
-
-    render(){
-        console.log('2 Render fired')
-        return(
-            <div>
-                {
-                    this.props.shouldShowTime ?
-                    this.state.date.toLocaleTimeString()
-                    :
-                    this.state.date.toLocaleDateString()
-                }
-            </div>
-        )
-    }
+    return(
+        <div>{dateTime.toLocaleTimeString()}</div>
+    );
 }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         date: new Date()
+    //     }
+    //     console.log('1 Constructor fired')
+    // }
 
-export default CurrentDateTime;
+    // componentDidMount(){
+    //     console.log('3 componentDidMount')
+    //     this.intervalId = setInterval(() => {
+    //         this.setState((state) => {
+    //             return {
+    //                 date: new Date()
+    //             }
+    //         })
+    //     }, 1000)
+    // }
+
+    // componentDidUpdate(){
+    //     console.log('componentDidUpdate')
+    // }
+
+    // componentWillUnmount(){
+    //     console.log('componentWillUnmount')
+    //     clearInterval(this.intervalId)
+    // }
+
+    // render(){
+    //     console.log('2 Render fired')
+    //     return(
+    //         <div>
+    //             {
+    //                 this.props.shouldShowTime ?
+    //                 this.state.date.toLocaleTimeString()
+    //                 :
+    //                 this.state.date.toLocaleDateString()
+    //             }
+    //         </div>
+    //     )
+    // }
+
+
+// export default CurrentDateTime;

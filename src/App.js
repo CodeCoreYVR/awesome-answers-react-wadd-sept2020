@@ -26,8 +26,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      clocksCount: [1],
-      user: null
+      clocksCount: true,
+      user: null,
     }
   }
 
@@ -58,7 +58,11 @@ class App extends Component {
     return(
       <div className="container">
         <BrowserRouter>
-          <Navbar currentUser={this.state.user} onSignOut={this.onSignOut}/>
+          <Navbar 
+          currentUser={this.state.user} 
+          onSignOut={this.onSignOut}
+          clocksCount={this.state.clocksCount}
+          />
           <Switch>
             <Route 
             exact 

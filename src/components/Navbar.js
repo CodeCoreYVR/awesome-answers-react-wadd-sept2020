@@ -1,8 +1,9 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Session} from '../requests';
+import {CurrentDateTime} from './CurrentDateTime';
 
-const Navbar = ({ currentUser, onSignOut }) => {
+const Navbar = ({ currentUser, onSignOut, clocksCount }) => {
     const handleSignOut = () => {
         Session.destroy().then(() => {
             onSignOut()
@@ -18,6 +19,9 @@ const Navbar = ({ currentUser, onSignOut }) => {
                     - 
                     <span>Welcome, {currentUser.full_name}</span>
                     <button onClick={handleSignOut}>Sign Out</button>
+                    <div>
+                        {clocksCount && <CurrentDateTime />}
+                    </div>
                     {/* React Fragment allow us to write components beside each other without wrapping
                     them in a parent container. This stops us from messing around the layout and
                     keeps the Navlinks as a direct child of the <nav>. The short from is <> </> */}

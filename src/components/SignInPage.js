@@ -1,32 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Session } from '../requests'
 
-function SignInPage(props) {
-  const { onSignIn } = props
+const SignInPage = props => {
+  const [errors, setErrors] = useState([])
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    const {currentTarget} = event
-    const formData = new FormData(currentTarget)
-    const params = {
+    const handleSubmit = event => {
+    event.preventDefault();
+    const {currentTarget: form} = event;
+    const formData = new FormData(form)
+
+    
+    
+    Session.create({
       email: formData.get('email'),
       password: formData.get('password'),
-    }
-    Session.create(params).then(data => {
-      if (data.id) {
-        onSignIn()
-        // Navigate to the index page from the browser
-        // We can "push" on history to manipulate the browser
-        // and direct our user to any page in our app
-        props.history.push('/questions')
+    }).then(data => {
+      if (data.status === 404){
+        setErrors([...errors, {message: "Wrong Email or Password"}]);
+      } else {
+        props.history.push('/');
+        if(typeof props.onSignIn === "function"){
+          props.onSignIn();
+        }
       }
-    })
-  }
+    });
+  };
 
   return (
     <main>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
+        {errors.length > 0 ? (
+          <div>
+            <div>Failed to Sign In</div>
+            <p>{errors.map(error => error.message).join(", ")}</p>
+          </div>
+        ) : (
+          ""
+        )}
         <div>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" />
