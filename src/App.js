@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import QuestionShowPage from './components/QuestionShowPage';
-import QuestionIndexPage from './components/QuestionIndexPage';
+import {QuestionIndexPage} from './components/QuestionIndexPage';
 import CurrentDateTime from './components/CurrentDateTime';
 import { User} from './requests';
 import Navbar from './components/Navbar';
