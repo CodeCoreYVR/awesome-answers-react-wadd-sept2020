@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { QuestionShowContext } from './QuestionShowPage';
 
-function AnswerDetails({ body, author, created_at, id, deleteAnswer }){
+export const AnswerDetails = props => {
+  const deleteAnswer = useContext(QuestionShowContext);
     return(
       <div>
         <p
@@ -8,15 +10,14 @@ function AnswerDetails({ body, author, created_at, id, deleteAnswer }){
           fontStyle: 'Roboto',
           fontSize: '12px'
         }}
-        >{body}</p>
+        >{props.body}</p>
         <div>
-          <small>By {author? author.full_name : null}</small>
-          <small style={{ marginLeft: '20px'}}>Answered {created_at}</small>
+          <small>By {props.author_full_name? props.author_full_name : null}</small>
+          <small style={{ marginLeft: '20px'}}>Answered {props.created_at}</small>
+          <button onClick={() => deleteAnswer(props.id)}>Delete</button>
           <br />
-          <button onClick={() => deleteAnswer(id)}>Delete</button>
         </div>
       </div>
     )
 }
 
-export default AnswerDetails;

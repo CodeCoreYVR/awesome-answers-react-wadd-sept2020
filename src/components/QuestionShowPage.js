@@ -3,8 +3,10 @@ import {QuestionDetails} from './QuestionDetails';
 import AnswerList from './AnswerList';
 import {Question} from '../requests'
 
+export const QuestionShowContext = React.createContext(); 
+
 const QuestionShowPage = props => {
-  const [questionShow, setQuestionShow] = useState();
+  const [questionShow, setQuestionShow] = useState({});
   
   const deleteQuestion = () => {
     Question.destroy(questionShow.question.id).then(data => {
@@ -13,11 +15,14 @@ const QuestionShowPage = props => {
   };
   
   const deleteAnswer = id => {
-    const newAnswers = questionShow.question.answers.filter(a => a.id !== id);
-    setQuestionShow({
-      ...questionShow,
-      question: { ...questionShow.question, answers: newAnswers }
-    });
+    setQuestionShow((state) => {
+      const questionCopy = JSON.parse(JSON.stringify(state));
+      const newAnswers = questionCopy.answers.filter((currentAnswer) => {
+        return currentAnswer.id !== id;
+      })
+      questionCopy.answers = newAnswers;
+      return questionCopy
+    })
   };
   
   useEffect(() => {
@@ -30,12 +35,14 @@ const QuestionShowPage = props => {
     <main>
         <QuestionDetails {...questionShow} />
         <button onClick={() => deleteQuestion()}>Delete</button>
+        <QuestionShowContext.Provider value={deleteAnswer}>
         {questionShow && questionShow.id && questionShow.answers?.length> 0 ?
         <AnswerList
         answers={questionShow?.answers}
         onAnswerDeleteClick={id => deleteAnswer(id)}
         /> : " "
         }
+        </QuestionShowContext.Provider>
       </main>
   );
  };

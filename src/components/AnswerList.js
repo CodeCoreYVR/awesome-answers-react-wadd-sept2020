@@ -1,27 +1,18 @@
 import React from 'react';
-import AnswerDetails from './AnswerDetails'
-// import answers from '../data/answers'
+import {AnswerDetails} from './AnswerDetails';
 
-function AnswerList(props, deleteAnswer){
-    const answers = props.answers
+    
+function AnswerList(props){
+const answers = props.answers
     return(
         <div>
-            
-            {
-            answers?
-            answers.map( ({ body, author, created_at, id}, index) => (
-                    <AnswerDetails 
-                    key={index}
-                    id={id}
-                    body={body}
-                    author={author}
-                    created_at={created_at.toLocaleString()}
-                    deleteAnswer={deleteAnswer}
+            <h2>Answers</h2>
+                {props.answers.map(answer => (
+                    <AnswerDetails
+                    key={answer.id}
+                    {...answer}
                     />
-                ))
-            :
-            null
-            }
+                ))}
         </div>
     )
 }

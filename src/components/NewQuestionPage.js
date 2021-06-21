@@ -1,23 +1,57 @@
-import React from 'react';
+import React, {Component} from 'react';
 import NewQuestionForm from './NewQuestionForm'
 import {Question} from '../requests'
 
-const NewQuestionPage = (props) => {
-    // Because NewQuestionPage is being rendered by a Route component provided by React-Router-Dom
-    // it will receive the history, location and match properties
-    function createQuestion(params) {
-        Question.create(params)
-        .then((question) => {
-            const id = question.id;
-            // the history prop contains methods used to navigate
-            props.history.push(`/questions/${id}`);
+class NewQuestionPage extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            newQuestionData: {
+                title: '',
+                body: '',
+            }
+        }
+        this.createQuestion = this.createQuestion.bind(this)
+        this.updateQuestionData = this.updateQuestionData.bind(this)
+    }
+
+    createQuestion() {
+        Question.create(this.state.newQuestionData)
+        .then(({id}) => {
+            this.props.history.push(`/questions/${id}`);
         })
     }
-    return(
-        <div>
-            <NewQuestionForm createQuestion={createQuestion}/>
-        </div>
-    )
+
+    updateQuestionData(props) { // props will be an object {title: 'new value title'} | {body: 'new value body'}
+        this.setState((state) => {
+            console.log(props);
+            console.log(state);
+            if(state.newQuestionData.title.length > 10){
+                alert('Title is too long')
+            }
+            return {
+                newQuestionData: {
+                    ...state.newQuestionData,
+                    ...props
+                }
+            }
+        })
+    }
+
+    render(){
+        return(
+            <div>
+                <NewQuestionForm 
+                createQuestion={this.createQuestion}
+                newQuestionData={this.state.newQuestionData}
+                updateQuestionData={this.updateQuestionData}
+                />
+          
+            </div>
+        )
+    }
+
+    
 }
 
 
