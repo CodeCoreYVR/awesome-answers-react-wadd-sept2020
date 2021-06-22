@@ -9,6 +9,7 @@ import NewQuestionPage from './components/NewQuestionPage';
 import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
 import SignUpPage from './components/SignUpPage';
+import NotFoundPage from './components/NotFoundPage';
 
  
 const App = () => {
@@ -67,7 +68,9 @@ const App = () => {
          isAuthenticated={!!appState.user}
          exact
          path='/questions/:id'
-         component={QuestionShowPage}/>
+         component={QuestionShowPage}
+         />
+        <Route component={NotFoundPage}/>
        </Switch>
      </BrowserRouter>
    </div>
