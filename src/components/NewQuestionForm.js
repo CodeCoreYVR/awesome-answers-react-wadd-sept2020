@@ -1,15 +1,18 @@
 import React from 'react'
+import FormErrors from './FormErrors';
 
-const NewQuestionForm = ({createQuestion, newQuestionData, updateQuestionData}) => {
+const NewQuestionForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
-        createQuestion();
+        const formData = new FormData(event.currentTarget)
+        const params = {
+            title: formData.get('title'),
+            body: formData.get('body')
+        }
+        props.createQuestion(params);
     }
 
-    function handleQuestionInput(event){
-        const {value, name} = event.currentTarget
-        updateQuestionData({[name]: value})
-    }
+    
 
     return(
         <form onSubmit={handleSubmit}>
@@ -20,9 +23,8 @@ const NewQuestionForm = ({createQuestion, newQuestionData, updateQuestionData}) 
                 <input 
                 name="title" 
                 id="title" 
-                value={newQuestionData.title}
-                onChange={handleQuestionInput}
                 />
+                <FormErrors forField="title" errors={props.errors}/>
             </div>
             <div>
                 <label htmlFor="body">Body</label>
@@ -30,8 +32,8 @@ const NewQuestionForm = ({createQuestion, newQuestionData, updateQuestionData}) 
                 <input 
                 name="body" 
                 id="body" 
-                value={newQuestionData.body} 
-                onChange={handleQuestionInput}/>
+                />
+                <FormErrors forField="body" errors={props.errors}/>
             </div>
             <div>
                 <input type="submit" value="Submit"/>

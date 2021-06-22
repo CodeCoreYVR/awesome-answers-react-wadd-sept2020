@@ -5,46 +5,29 @@ import {Question} from '../requests'
 class NewQuestionPage extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            newQuestionData: {
-                title: '',
-                body: '',
-            }
-        }
-        this.createQuestion = this.createQuestion.bind(this)
-        this.updateQuestionData = this.updateQuestionData.bind(this)
+        this.state = { errors: []}
+        this.createQuestion = this.createQuestion.bind(this);
     }
 
-    createQuestion() {
-        Question.create(this.state.newQuestionData)
-        .then(({id}) => {
-            this.props.history.push(`/questions/${id}`);
+    createQuestion(params) {
+        Question.create(params)
+        .then((question) => {
+            if(question.errors){
+                this.setState({errors: question.errors});
+            } else {
+                this.props.history.push(`/questions/${question.id}`);
+            }
         })
     }
 
-    updateQuestionData(props) { // props will be an object {title: 'new value title'} | {body: 'new value body'}
-        this.setState((state) => {
-            console.log(props);
-            console.log(state);
-            if(state.newQuestionData.title.length > 10){
-                alert('Title is too long')
-            }
-            return {
-                newQuestionData: {
-                    ...state.newQuestionData,
-                    ...props
-                }
-            }
-        })
-    }
+    
 
     render(){
         return(
             <div>
                 <NewQuestionForm 
                 createQuestion={this.createQuestion}
-                newQuestionData={this.state.newQuestionData}
-                updateQuestionData={this.updateQuestionData}
+                errors={this.state.errors}
                 />
           
             </div>
