@@ -33,8 +33,10 @@ const QuestionShowPage = props => {
   
   return (
     <main>
-        <QuestionDetails {...questionShow} />
-        <button onClick={() => deleteQuestion()}>Delete</button>
+        <div className="ui teal clearing segment">
+          <QuestionDetails {...questionShow} />
+          <button className="ui right floated red button" onClick={() => deleteQuestion()}>Delete</button>
+        </div>
         <QuestionShowContext.Provider value={deleteAnswer}>
         {questionShow && questionShow.id && questionShow.answers?.length> 0 ?
         <AnswerList
