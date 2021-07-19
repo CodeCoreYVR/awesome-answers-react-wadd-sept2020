@@ -28,8 +28,8 @@ const SignInPage = props => {
 
   return (
     <main>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="ui horizontal divider">Sign In</h1>
+      <form className="ui form clearing segment" onSubmit={handleSubmit}>
         {errors.length > 0 ? (
           <div>
             <div>Failed to Sign In</div>
@@ -38,15 +38,15 @@ const SignInPage = props => {
         ) : (
           ""
         )}
-        <div>
+        <div className="field">
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
         </div>
-        <input type="submit" value="Sign In" />
+        <input className="ui right floated large blue button" type="submit" value="Sign In" />
       </form>
     </main>
   )

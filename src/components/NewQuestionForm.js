@@ -15,20 +15,18 @@ const NewQuestionForm = (props) => {
     
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form className="ui form clearing segment" onSubmit={handleSubmit}>
             <h1>New Question</h1>
-            <div>
+            <div className="field">
                 <label htmlFor="title">Title</label>
-                <br/>
                 <input 
                 name="title" 
                 id="title" 
                 />
                 <FormErrors forField="title" errors={props.errors}/>
             </div>
-            <div>
+            <div className="field">
                 <label htmlFor="body">Body</label>
-                <br/>
                 <input 
                 name="body" 
                 id="body" 
@@ -36,7 +34,7 @@ const NewQuestionForm = (props) => {
                 <FormErrors forField="body" errors={props.errors}/>
             </div>
             <div>
-                <input type="submit" value="Submit"/>
+                <input className="ui right floated large orange button" type="submit" value="Submit"/>
             </div>
         </form>
     )

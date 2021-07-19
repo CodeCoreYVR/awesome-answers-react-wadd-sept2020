@@ -24,29 +24,29 @@ const SignUpPage = (props) => {
     }
     return(
         <main>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <h1 className="ui horizontal divider">Sign Up</h1>
+            <form className="ui form clearing segment" onSubmit={handleSubmit}>
+                <div className="field">
                     <label htmlFor="first_name">First Name</label>
                     <input type="text" name="first_name" id="first_name" />
                 </div> 
-                <div>
+                <div className="field">
                     <label htmlFor="last_name">Last Name</label>
                     <input type="text" name="last_name" id="last_name" />
                 </div> 
-                <div>
+                <div className="field">
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" />
                 </div> 
-                <div>
+                <div className="field">
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" />
                 </div> 
-                <div>
+                <div className="field">
                     <label htmlFor="password_confirmation">Password Confirmation</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" />
                 </div> 
-                <input type="submit"  value="Sign Up" />               
+                <input className="ui right floated large orange button" type="submit" value="Sign Up" />               
             </form>
         </main>
     )
