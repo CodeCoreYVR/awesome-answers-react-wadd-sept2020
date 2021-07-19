@@ -11,8 +11,8 @@ const Navbar = ({ currentUser, onSignOut, clocksCount }) => {
     }
     return(
         <nav className="ui secondary pointing menu">
+            <NavLink className="item" to='/'>Home</NavLink>
             <NavLink className="item" to='/questions'>Questions Index</NavLink>
-            
             { currentUser ? (
                 <React.Fragment>
                     <NavLink className="item" to='/questions/new'>New Questions</NavLink>

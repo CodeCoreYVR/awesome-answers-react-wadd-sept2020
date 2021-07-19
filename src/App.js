@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import QuestionShowPage from './components/QuestionShowPage';
 import {QuestionIndexPage} from './components/QuestionIndexPage';
-import CurrentDateTime from './components/CurrentDateTime';
 import { Session, User} from './requests';
 import Navbar from './components/Navbar';
 import NewQuestionPage from './components/NewQuestionPage';
@@ -10,6 +9,7 @@ import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
 import SignUpPage from './components/SignUpPage';
 import NotFoundPage from './components/NotFoundPage';
+import { WelcomePage } from './components/WelcomePage';
 
  
 const App = () => {
@@ -56,6 +56,9 @@ const App = () => {
             path='/sign_up'
             render={routeProps => <SignUpPage {...routeProps} onSignUp={getCurrentUser} />}
             />
+            <Route exact path='/'>
+              <WelcomePage />
+            </Route>
             <Route exact path='/questions'>
               <QuestionIndexPage />
             </Route>
