@@ -10,16 +10,17 @@ const Navbar = ({ currentUser, onSignOut, clocksCount }) => {
         })
     }
     return(
-        <nav>
-            <NavLink to='/questions'>Questions Index</NavLink>
-            -
+        <nav className="ui secondary pointing menu">
+            <NavLink className="item" to='/questions'>Questions Index</NavLink>
+            
             { currentUser ? (
                 <React.Fragment>
-                    <NavLink to='/questions/new'>New Questions</NavLink>
-                    - 
-                    <span>Welcome, {currentUser.full_name}</span>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                    <div>
+                    <NavLink className="item" to='/questions/new'>New Questions</NavLink>
+                    <div className="right menu">
+                        <span className="item" >Welcome, {currentUser.full_name}</span>
+                    </div>
+                    <button className="small ui blue button" onClick={handleSignOut}>Sign Out</button>
+                    <div className="ui top right orange large label">
                         {clocksCount && <CurrentDateTime />}
                     </div>
                     {/* React Fragment allow us to write components beside each other without wrapping
@@ -27,11 +28,10 @@ const Navbar = ({ currentUser, onSignOut, clocksCount }) => {
                     keeps the Navlinks as a direct child of the <nav>. The short from is <> </> */}
                 </React.Fragment>
             ) : (
-                <>
-                    <NavLink to='/sign_in'>Sign In</NavLink>
-                    - 
-                    <NavLink to='/sign_up'>Sign Up</NavLink>
-                </>
+                <div className="right menu">
+                    <NavLink className="small ui blue button" to='/sign_in'>Sign In</NavLink>  
+                    <NavLink className="small ui orange button" to='/sign_up'>Sign Up</NavLink>
+                </div>
             ) } 
         </nav>
     )

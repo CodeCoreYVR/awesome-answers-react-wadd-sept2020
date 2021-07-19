@@ -37,43 +37,45 @@ const App = () => {
  }, []);
  
  return (
-   <div className="container">
-     <BrowserRouter>
+   <BrowserRouter>
+      <main className="App">
        <Navbar
        currentUser={appState.user}
        onSignOut={onSignOut}
        clocksCount={appState.clocksCount}
        />
-       <Switch>
-         <Route
-         exact
-         path='/sign_in'
-         render={ routeProps => <SignInPage {...routeProps} onSignIn={getCurrentUser} /> }
-         />
-         <Route
-         exact
-         path='/sign_up'
-         render={routeProps => <SignUpPage {...routeProps} onSignUp={getCurrentUser} />}
-         />
-         <Route exact path='/questions'>
-           <QuestionIndexPage />
-         </Route>
-         <AuthRoute
-           isAuthenticated={!!appState.user}
-           exact
-           path='/questions/new'
-           component={NewQuestionPage}
-         />
-         <AuthRoute
-         isAuthenticated={!!appState.user}
-         exact
-         path='/questions/:id'
-         component={QuestionShowPage}
-         />
-        <Route component={NotFoundPage}/>
-       </Switch>
-     </BrowserRouter>
-   </div>
+       <div className="ui container">
+          <Switch>
+            <Route
+            exact
+            path='/sign_in'
+            render={ routeProps => <SignInPage {...routeProps} onSignIn={getCurrentUser} /> }
+            />
+            <Route
+            exact
+            path='/sign_up'
+            render={routeProps => <SignUpPage {...routeProps} onSignUp={getCurrentUser} />}
+            />
+            <Route exact path='/questions'>
+              <QuestionIndexPage />
+            </Route>
+            <AuthRoute
+              isAuthenticated={!!appState.user}
+              exact
+              path='/questions/new'
+              component={NewQuestionPage}
+            />
+            <AuthRoute
+            isAuthenticated={!!appState.user}
+            exact
+            path='/questions/:id'
+            component={QuestionShowPage}
+            />
+            <Route component={NotFoundPage}/>
+          </Switch>
+        </div>
+      </main> 
+    </BrowserRouter>
  )
 }
  
