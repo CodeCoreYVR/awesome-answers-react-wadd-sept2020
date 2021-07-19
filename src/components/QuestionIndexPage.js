@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import NewQuestionForm from './NewQuestionForm';
 import {Question} from '../requests';
 import {Link} from 'react-router-dom';
 
@@ -8,12 +7,6 @@ export const QuestionIndexPage = () => {
         questions: [],
     });
      
-    const deleteQuestion = id => {
-        const newQuestionsList = questionIndex.questions.filter(q => q.id !== id);
-        setQuestionIndex({ ...questionIndex, questions: newQuestionsList });
-    };
-  
-  
     useEffect(() => {
         Question.index().then(questions => {
           setQuestionIndex({ questions });
@@ -21,17 +14,15 @@ export const QuestionIndexPage = () => {
     }, []);
   
     return(
-            <main>
-                <h1>Questions</h1>
-                <ul style={{
-                    listStyle: 'none',
-                    paddingLeft: 0,
-                }}>
+            <main className="Page">
+                <h1 className="ui horizontal divider">Questions</h1>
+                <ul className="ui list">
                 {questionIndex.questions.map(question => (
-                    <li key={question.id}>
-                        <Link to={`/questions/${question.id}`}>{question.id} - {question.title}</Link>
-                        <button onClick={()=> deleteQuestion(question.id)}>Delete</button>
-                    </li>
+                    <div className="ui segment" key={question.id}>
+                        <Link className="item" to={`/questions/${question.id}`}>
+                            <h3 className="ui header">{question.title}</h3>
+                        </Link>
+                    </div>
                 ))}
                 </ul>
             </main>
